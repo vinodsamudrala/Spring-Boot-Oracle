@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+import javax.validation.constraints.Size;
+
 import java.math.BigDecimal;
 
 /**
@@ -15,11 +18,24 @@ public class MSRNData {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+    @Size (min=2, message="Name should have atleast 2 characters")
     private String description;
     private BigDecimal price;
     private String imageUrl;
+    
+    @Transient
+    String status = "";
+    
+    
+	public String getStatus() {
+		return status;
+	}
 
-    public Long getId() {
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Long getId() {
         return id;
     }
 
